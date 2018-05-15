@@ -6,6 +6,7 @@
 - I want to know which products the user group members click on at a higher rate (when given a choice of 3 options) to help priortize the top products (regardless of what else it was shown against). 
 - Stretch goals: As a market researcher, I want to know how a given product compares to another specific item it was shown against. 
 - If the presense of a specific third options changes the preference between two other items, I want to know this information to consider including an item to increase our margins when selling other items.
+- As a market researcher I want to see a graphical output of the data so that it is easier to see patterns and understand the data. 
 
 ## Focus Group User
 - As a focus group member, I want to have an easy interface to be able to simply select with of the items I prefer. 
