@@ -1,0 +1,92 @@
+
+
+/* ========================================= */
+/* A LOT of this Style is NOT correct.  */
+/* I need to read up on CSS Layout.  */
+/* Current state of my CSS layout is a testing ground.  */
+/* ========================================== */
+
+/* Header Section  */
+/* Has a logo img, a horizontal nav bar with tab like display */
+header {
+    background-color: #eee; 
+    height: 100px; 
+}
+header img {
+    padding: 15px 5px; 
+    float: left; 
+    width: 200px; 
+}
+header h1 {
+    margin: 15px 0 15px 0; 
+    text-align: center; 
+    float: left; 
+    /* border: 1px solid red;  */
+    
+}
+header ul {
+    float: left; 
+    display: inline-block;
+    /* border: 1px solid purple;  */
+    
+}
+header li {
+    display: inline-block; 
+    width: 70px;
+    height: 30px; 
+    border: 3px solid grey;  
+    margin: 0; 
+}
+header li a {
+
+}
+
+/* Results Aside  */
+aside {
+    clear: left; 
+    width: 20%; 
+    /* border: 1px solid red;  */
+    
+}
+aside ul {
+
+}
+aside li {
+
+}
+
+/* Main Section holds div#vote-box, 3 img, button, and some p */
+main {
+    clear: left; 
+    width: 80%; 
+    height: 300px; 
+}
+#vote-box {
+
+}
+#vote-box form li img {
+    width: 200px; 
+}
+#vote-box form ul {
+    display: inline-block;
+
+}
+#vote-box form li {
+    display: inline-block;
+    
+}
+#vote-box form input {
+    display: block; 
+    margin: 0 95px; /* maybe cludgy position */ 
+}
+#vote-box button {
+    display: block; 
+    width: 400px; 
+    margin: 15px 100px; 
+
+}
+
+/* Footer Section  */
+footer {
+
+}
