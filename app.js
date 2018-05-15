@@ -14,28 +14,25 @@
 // ul#results is inside the aside for results later.
 // div#vote-box is container of form, image selection, and vote button
 // form#preference for our form input
-// input name="favorite" with radio options r1, r2, r3
+// input name="favorite" with radio options r0, r1, r2
 //
-// img#opt1, img#opt2, img#opt3 are the 3 comparison images inside div#vote-box
+// img#opt0, img#opt1, img#opt2 are the 3 comparison images inside div#vote-box
 //
 
 var compareCount = 3; // original plan for how many to compare at each test.
 var compareThem = []; // an array for however many we will compare at one time.
-// for(var i = 0; i < compareCount; i++) {
-  // compareThem[i] = '';
-// }
 
 var currentCompare = []; // these are the selected objects for our current test.
 var notAllowed = []; // will store objects shown last time and selected for this time since neither are allowed to duplicate this time.
 
 var voted = document.getElementById('preference');
+var choose0 = document.getElementById('r0');
 var choose1 = document.getElementById('r1');
 var choose2 = document.getElementById('r2');
-var choose3 = document.getElementById('r3');
 
+var img0 = document.getElementById('opt0');
 var img1 = document.getElementById('opt1');
 var img2 = document.getElementById('opt2');
-var img3 = document.getElementById('opt3');
 
 var liEl = document.getElementById('item1');
 
@@ -90,10 +87,10 @@ function randomProduct() {
 
 function renderThree(compareArray) {
   // for now assume the array only has 3 items
-  img1.setAttribute('src', productList[compareArray[0]].filepath);
-  
-  img2.setAttribute('src', productList[compareArray[1]].filepath);
-  img3.setAttribute('src', productList[compareArray[2]].filepath);
+  img0.setAttribute('src', productList[compareArray[0]].filepath);
+
+  img1.setAttribute('src', productList[compareArray[1]].filepath);
+  img2.setAttribute('src', productList[compareArray[2]].filepath);
 } // end function renderThree
 
 // ===================
