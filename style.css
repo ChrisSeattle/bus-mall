@@ -9,7 +9,7 @@
 /* Header Section  */
 /* Has a logo img, a horizontal nav bar with tab like display */
 header {
-    background-color: lightblue; 
+    background-color: #eee; 
     height: 100px; 
 }
 header img {
@@ -67,11 +67,25 @@ main {
 #vote-box {
 
 }
-#vote-box img {
+#vote-box form li img {
+    width: 200px; 
+}
+#vote-box form ul {
+    display: inline-block;
 
+}
+#vote-box form li {
+    display: inline-block;
+    
+}
+#vote-box form input {
+    display: block; 
+    margin: 0 95px; /* maybe cludgy position */ 
 }
 #vote-box button {
     display: block; 
+    width: 400px; 
+    margin: 15px 100px; 
 
 }
 
