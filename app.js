@@ -19,6 +19,7 @@
 // img#opt0, img#opt1, img#opt2 are the 3 comparison images inside div#vote-box
 //
 
+var batteryLength = 25; 
 var compareCount = 3; // original plan for how many to compare at each test.
 var compareThem = []; // an array for however many we will compare at one time.
 
@@ -34,8 +35,11 @@ var img0 = document.getElementById('opt0');
 var img1 = document.getElementById('opt1');
 var img2 = document.getElementById('opt2');
 
-var liEl = document.getElementById('item1');
 
+// var testBattery = [];
+// var liEl = document.getElementById('item1');
+
+var testCount = 0;
 var productList = []; // Constructor will push each product object instance to this list
 
 // ====================================
@@ -88,9 +92,11 @@ function randomProduct() {
 function renderThree(compareArray) {
   // for now assume the array only has 3 items
   img0.setAttribute('src', productList[compareArray[0]].filepath);
-
+  choose0.setAttribute('value', compareArray[0]);
   img1.setAttribute('src', productList[compareArray[1]].filepath);
+  choose1.setAttribute('value', compareArray[1]);
   img2.setAttribute('src', productList[compareArray[2]].filepath);
+  choose2.setAttribute('value', compareArray[2]);
 } // end function renderThree
 
 // ===================
@@ -103,12 +109,12 @@ function renderThree(compareArray) {
 // choose3 = document.getElementById('r3');
 
 function makeCurrentTest() { // takes in an array of previously used products
-  if(notAllowed.length === 0) { // so this is the first display of a test set. 
-    notAllowed = [productList.length + 1]; // could just be length I think. 
+  if(notAllowed.length === 0) { // so this is the first display of a test set.
+    notAllowed = [productList.length + 1]; // could just be length I think.
   }
   // select a random object from our productList array
   // add this object to notAllowed & currentCompare arrays
-  for(var j = 0; j < 3; j++) { // currently assuming comparing 3 items each test 
+  for(var j = 0; j < 3; j++) { // currently assuming comparing 3 items each test
     do {
       currentCompare[j] = randomProduct();
       var allowedFlag = true;
@@ -116,23 +122,27 @@ function makeCurrentTest() { // takes in an array of previously used products
       for(var i = 0; i < notAllowed.length; i++) {
         console.log('does ' + currentCompare[j] + ' equal ' + notAllowed[i]);
         if(currentCompare[j] === notAllowed[i]) {
-          allowedFlag = false; 
-        } 
-      } // test if current item is in the not allowed list 
-    } while(allowedFlag === false); 
+          allowedFlag = false;
+        }
+      } // test if current item is in the not allowed list
+    } while(allowedFlag === false);
     notAllowed.push(currentCompare[j]);
   } // we have selected 3 non-duplicate indexes that also don't match the passed array of notAllowed
-  // Stretch: for each compareThem (which has compareCount number of items) make a list of allowed indexes. 
+  // Stretch: for each compareThem (which has compareCount number of items) make a list of allowed indexes.
 
   // now that current currentCompare array is complete, send this to render
-  renderThree(currentCompare); 
+  renderThree(currentCompare);
 } // end function makeCurrentTest
 
 function prepNextTest() {
   notAllowed = currentCompare.slice(0, currentCompare.length);
-  // console.log('currently notAllowed has ' + notAllowed.length + ' items.'); 
-  currentCompare = []; 
+  // console.log('currently notAllowed has ' + notAllowed.length + ' items.');
+  currentCompare = [];
 } // end function prepNextTest
+
+function makeResults() {
+
+} // end makeResults
 
 // ===================
 // Event functions / handlers.
@@ -141,14 +151,31 @@ function prepNextTest() {
 function handleSubmit(e) {
   e.preventDefault(); // otherwise we get a page refresh on form
   var fav = e.target.favorite.value; // this is the one they selected.
-
+  // increment the click counter for the product selected
+  productList[fav].clickCount ++;
+  console.log(fav);
+  // increment the shown counter for all displayed products
+  for(var i in currentCompare) {
+    productList[i].shownCount ++;
+  }
+  console.log('current set of this test: ' + currentCompare);
+  // testBattery.push = currentCompare;
+  // console.log('all test sets for this battery of tests: ' + testBattery);
+  testCount++;
+  console.log('tests completed: ' + testCount);
+  if(testCount < batteryLength + 1) {
+    prepNextTest(); 
+    makeCurrentTest(); 
+  } else {
+    makeResults(); 
+  }
 }
 // ====================================
 // On page load, do the following
 // ====================================
 
 
-makeCurrentTest(); 
+makeCurrentTest();
 
 
 // ====================================
