@@ -11,7 +11,9 @@
 // ====================================
 
 // some HTML ids we will need
+// p#progress shows text like "You have done 'x' tests out of 25"
 // ul#results is inside the aside for results later.
+// 
 // div#vote-box is container of form, image selection, and vote button
 // form#preference for our form input
 // input name="favorite" with radio options r0, r1, r2
@@ -27,10 +29,10 @@ var currentCompare = []; // these are the selected objects for our current test.
 var notAllowed = []; // will store objects shown last time and selected for this time since neither are allowed to duplicate this time.
 
 var voted = document.getElementById('preference');
+var pElProgress = document.getElementById('progress');
 var choose0 = document.getElementById('r0');
 var choose1 = document.getElementById('r1');
 var choose2 = document.getElementById('r2');
-
 var img0 = document.getElementById('opt0');
 var img1 = document.getElementById('opt1');
 var img2 = document.getElementById('opt2');
@@ -140,8 +142,17 @@ function prepNextTest() {
   currentCompare = [];
 } // end function prepNextTest
 
+function renderProgress() {
+  pElProgress.textContent = 'You have completed ' + testCount + ' out of ' + batteryLength + '.'; 
+}
 function makeResults() {
-
+  // ul#results is inside the aside for results.
+  var ulEl = document.getElementById('results'); 
+  for(var i in productList) {
+    var liEl = document.createElement('li');
+    liEl.textContent = '' + productList[i].name + ': ' + productList[i].clickCount + ' out of ' + productList[i].shownCount + '.'; 
+    ulEl.appendChild(liEl);
+  }
 } // end makeResults
 
 // ===================
@@ -156,18 +167,22 @@ function handleSubmit(e) {
   console.log(fav);
   // increment the shown counter for all displayed products
   for(var i in currentCompare) {
-    productList[i].shownCount ++;
+    productList[currentCompare[i]].shownCount ++;
+    console.log(productList[currentCompare[i]].name + ' shown: ' + productList[currentCompare[i]].shownCount); 
   }
   console.log('current set of this test: ' + currentCompare);
   // testBattery.push = currentCompare;
   // console.log('all test sets for this battery of tests: ' + testBattery);
   testCount++;
   console.log('tests completed: ' + testCount);
-  if(testCount < batteryLength + 1) {
+  if(testCount < batteryLength) {
+    renderProgress(); 
     prepNextTest(); 
     makeCurrentTest(); 
   } else {
     makeResults(); 
+    voted.style.display = 'none'; 
+    pElProgress.style.display = 'none';
   }
 }
 // ====================================
@@ -183,9 +198,3 @@ makeCurrentTest();
 // ====================================
 
 voted.addEventListener('submit', handleSubmit);
-
-// Example with 'click' as Event Listner
-// imgEl2.addEventListener('click', function() {
-  // allPictures[picture2Index].clicked++;
-  // chooseNewPictures();
-

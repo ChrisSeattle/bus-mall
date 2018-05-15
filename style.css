@@ -21,9 +21,7 @@ header h1 {
     margin: 15px 0 15px 0; 
     text-align: center; 
     float: left; 
-    /* width: 200px;  */
-    /* display: inline-block; */
-    border: 1px solid red; 
+    /* border: 1px solid red;  */
     
 }
 header ul {
@@ -46,9 +44,8 @@ header li a {
 /* Results Aside  */
 aside {
     clear: left; 
-    /* height: 300px;  */
     width: 20%; 
-    border: 1px solid red; 
+    /* border: 1px solid red;  */
     
 }
 aside ul {
