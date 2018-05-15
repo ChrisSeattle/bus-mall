@@ -95,10 +95,13 @@ function renderThree(compareArray) {
   // for now assume the array only has 3 items
   img0.setAttribute('src', productList[compareArray[0]].filepath);
   choose0.setAttribute('value', compareArray[0]);
+  choose0.checked = false;
   img1.setAttribute('src', productList[compareArray[1]].filepath);
   choose1.setAttribute('value', compareArray[1]);
+  choose1.checked = false;
   img2.setAttribute('src', productList[compareArray[2]].filepath);
   choose2.setAttribute('value', compareArray[2]);
+  choose2.checked = false;
 } // end function renderThree
 
 // ===================
