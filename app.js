@@ -1,11 +1,5 @@
 'use strict';
 
-// ===================================
-// currently most of the functions are dealing with index numbers
-// but not actually passing or holding the objects. Maybe should change
-// ====================================
-
-
 // ====================================
 // Some global variables
 // ====================================
@@ -13,13 +7,17 @@
 // some HTML ids we will need
 // p#progress shows text like "You have done 'x' tests out of 25"
 // ul#results is inside the aside for results later.
-// 
 // div#vote-box is container of form, image selection, and vote button
 // form#preference for our form input
 // input name="favorite" with radio options r0, r1, r2
-//
 // img#opt0, img#opt1, img#opt2 are the 3 comparison images inside div#vote-box
-//
+
+var ctx = document.getElementById('myChart').getContext('2d'); 
+var dataChart; 
+var titles = []; // used for labels in charts.js
+var clicks = []; // used for clickCount data in charts.js
+var shown = [];  // used for shownCount data in charts.js
+var chartDrawn = false; 
 
 var batteryLength = 25; 
 var compareCount = 3; // original plan for how many to compare at each test.
@@ -36,10 +34,7 @@ var choose2 = document.getElementById('r2');
 var img0 = document.getElementById('opt0');
 var img1 = document.getElementById('opt1');
 var img2 = document.getElementById('opt2');
-
-
-// var testBattery = [];
-// var liEl = document.getElementById('item1');
+// var liEl = document.getElementById('item1'); // currently not used, but still an option in HTML
 
 var testCount = 0;
 var productList = []; // Constructor will push each product object instance to this list
@@ -50,7 +45,6 @@ var productList = []; // Constructor will push each product object instance to t
 
 function Product(name, filepath) {
   this.name = name;
-  // this.idTag = idTag;
   this.filepath = filepath;
   this.shownCount = 0;
   this.clickCount = 0;
@@ -58,7 +52,7 @@ function Product(name, filepath) {
 } // end Product Object constructor function
 
 // === Some Object Methods ===
-
+// hmm, perhaps none. 
 
 // === Create Known Object Instances ===
 // Our given Input Data
@@ -108,24 +102,19 @@ function renderThree(compareArray) {
 // Main Functions
 // ===================
 
-// voted = document.getElementById('preference');
-// choose1 = document.getElementById('r1');
-// choose2 = document.getElementById('r2');
-// choose3 = document.getElementById('r3');
-
-function makeCurrentTest() { // takes in an array of previously used products
+function makeCurrentTest() { // works with an array of previously used products
   if(notAllowed.length === 0) { // so this is the first display of a test set.
-    notAllowed = [productList.length + 1]; // could just be length I think.
+    notAllowed = [productList.length + 1]; // maybe could be productList.length, I think.
   }
   // select a random object from our productList array
   // add this object to notAllowed & currentCompare arrays
   for(var j = 0; j < 3; j++) { // currently assuming comparing 3 items each test
-    do {
-      currentCompare[j] = randomProduct();
+    do {  // much of this can be replaced with array.includes or array.indexOf
+      currentCompare[j] = randomProduct(); 
       var allowedFlag = true;
-      console.log('item ' + j + ' selected: ' + currentCompare[j]);
+      // console.log('item ' + j + ' selected: ' + currentCompare[j]);
       for(var i = 0; i < notAllowed.length; i++) {
-        console.log('does ' + currentCompare[j] + ' equal ' + notAllowed[i]);
+        // console.log('does ' + currentCompare[j] + ' equal ' + notAllowed[i]);
         if(currentCompare[j] === notAllowed[i]) {
           allowedFlag = false;
         }
@@ -141,15 +130,16 @@ function makeCurrentTest() { // takes in an array of previously used products
 
 function prepNextTest() {
   notAllowed = currentCompare.slice(0, currentCompare.length);
-  // console.log('currently notAllowed has ' + notAllowed.length + ' items.');
   currentCompare = [];
 } // end function prepNextTest
 
 function renderProgress() {
   pElProgress.textContent = 'You have completed ' + testCount + ' out of ' + batteryLength + '.'; 
-}
-function makeResults() {
-  // ul#results is inside the aside for results.
+  // in here we could put some words of encouragement or cute stuff as we go along. 
+} // end function renderProgress
+
+function makeResults() { // this will be a list of text of the data.
+  // ul#results is inside the aside for results
   var ulEl = document.getElementById('results'); 
   for(var i in productList) {
     var liEl = document.createElement('li');
@@ -157,6 +147,92 @@ function makeResults() {
     ulEl.appendChild(liEl);
   }
 } // end makeResults
+
+function renderCharts() {
+  // var ctx set as global variable
+  // unhide the chart 
+
+  // need data array(s) to pass to charts.js
+  for(var i in productList) { // set the arrays to be easier to use chart.js
+    titles[i] = productList[i].name; 
+    clicks[i] = productList[i].clickCount; 
+    shown[i] = productList[i].shownCount; 
+  }
+
+  var data = {
+    labels: titles, // titles array we declared earlier
+    datasets: [{
+      data: clicks, // clickCount array we declared earlier
+      backgroundColor: [
+        'bisque',
+        'darkgray',
+        'burlywood',
+        'lightblue',
+        'navy',
+        'bisque',
+        'darkgray',
+        'burlywood',
+        'lightblue',
+        'navy',
+        'bisque',
+        'darkgray',
+        'burlywood',
+        'lightblue',
+        'navy',
+        'bisque',
+        'darkgray',
+        'burlywood',
+        'lightblue',
+        'navy'        
+      ],
+      hoverBackgroundColor: [
+        'purple',
+        'purple',
+        'purple',
+        'purple',
+        'purple',
+        'purple',
+        'purple',
+        'purple',
+        'purple',
+        'purple',
+        'purple',
+        'purple',
+        'purple',
+        'purple',
+        'purple',
+        'purple',
+        'purple',
+        'purple',
+        'purple',
+        'purple'                        
+      ]
+    }]
+  }; // end literal object declaration data; 
+
+  dataChart = new Chart(ctx, {
+    type: 'doughnut',
+    data: data,
+    options: {
+      responsive: false,
+      animation: {
+        duration: 1000,
+        easing: 'easeOutBounce'
+      }
+    },
+    scales: {
+      yAxes: [{
+        ticks: {
+          max: 10,
+          min: 0,
+          stepSize: 1.0
+        }
+      }]
+    }
+  });
+  chartDrawn = true;
+
+} // end renderCharts
 
 // ===================
 // Event functions / handlers.
@@ -167,23 +243,25 @@ function handleSubmit(e) {
   var fav = e.target.favorite.value; // this is the one they selected.
   // increment the click counter for the product selected
   productList[fav].clickCount ++;
-  console.log(fav);
   // increment the shown counter for all displayed products
   for(var i in currentCompare) {
     productList[currentCompare[i]].shownCount ++;
-    console.log(productList[currentCompare[i]].name + ' shown: ' + productList[currentCompare[i]].shownCount); 
+    // console.log(productList[currentCompare[i]].name + ' shown: ' + productList[currentCompare[i]].shownCount); 
   }
-  console.log('current set of this test: ' + currentCompare);
-  // testBattery.push = currentCompare;
-  // console.log('all test sets for this battery of tests: ' + testBattery);
+  // console.log('current set of this test: ' + currentCompare);
   testCount++;
-  console.log('tests completed: ' + testCount);
+  // console.log('tests completed: ' + testCount);
   if(testCount < batteryLength) {
     renderProgress(); 
     prepNextTest(); 
     makeCurrentTest(); 
   } else {
-    makeResults(); 
+    // makeResults(); 
+    renderCharts(); // renderCharts() is prettier than the list of makeResults()
+    if(chartDrawn) { 
+      dataChart.update();
+    }
+    // hide some elements we don't need to see or interact with. 
     voted.style.display = 'none'; 
     pElProgress.style.display = 'none';
   }
@@ -191,7 +269,6 @@ function handleSubmit(e) {
 // ====================================
 // On page load, do the following
 // ====================================
-
 
 makeCurrentTest();
 

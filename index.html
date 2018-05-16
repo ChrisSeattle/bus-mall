@@ -1,63 +1,64 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Document</title>
-  <link type="text/css" rel="stylesheet" href="/reset.css" />
-  <link type="text/css" rel="stylesheet" href="/style.css" />
-</head>
-<body>
-  <header>
-    <img title="Logo" alt="Sky Mall" src="http://placehold.it/200x70/666" />
-    <h1>Title</h1>
-    <nav>
-      <ul>
-        <li><a href="#" title="home">Home</a></li>
-        <li><a href="#" title="product">Products</a></li>
-        <li><a href="#" title="about">About</a></li>
-        <li><a href="#" title="contact">Contact</a></li>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link type="text/css" rel="stylesheet" href="/reset.css" />
+    <link type="text/css" rel="stylesheet" href="/style.css" />
+  </head>
+  <body>
+    <header>
+      <img title="Logo" alt="Sky Mall" src="http://placehold.it/200x70/666" />
+      <h1>Title</h1>
+      <nav>
+        <ul>
+          <li><a href="#" title="home">Home</a></li>
+          <li><a href="#" title="product">Products</a></li>
+          <li><a href="#" title="about">About</a></li>
+          <li><a href="#" title="contact">Contact</a></li>
+        </ul>
+      </nav>
+    </header>
+    <aside>
+      <h2>Results</h2>
+      <p id="progress">Time to start. Select a radio button &amp; submit! </p>
+      <ul id="results">
       </ul>
-    </nav>
-  </header>
-  <aside>
-    <h2>Results</h2>
-    <p id="progress"></p>
-    <ul id="results">
-    </ul>
-    &nbsp;
-  </aside>
-  <main>
-    <div id="vote-box">
+    </aside>
+    <main>
+      <div id="vote-box">
         <form id="preference">
-            <fieldset>
-          <ul>
-            <li id="item0">
-              <img id="opt0" src="http://placehold.it/200x200/333" />
-              <input type="radio" id="r0" value="radio1st" name="favorite" />
-            </li>
-            <li id="item1">
-              <img id="opt1" src="http://placehold.it/200x200/333" />
-              <input type="radio" id="r1" value="radio2nd" name="favorite" />
-            </li>
-            <li id="item2">
-              <img id="opt2" src="http://placehold.it/200x200/333" />
-              <input type="radio" id="r2" value="radio3rd" name="favorite" />
-            </li>
-          </ul>
-        </fieldset>
-        <button type="submit">Vote!</button>
-      </form>
-      <!-- <img id="opt0" src="http://placehold.it/200x150/333" /> -->
-      <!-- <img id="opt1" src="http://placehold.it/200x150/333" /> -->
-      <!-- <img id="opt2" src="http://placehold.it/200x150/333" /> -->
-    </div><!-- div#vote-box -->
-    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-  </main>
-  <footer>
-
-  </footer>
-  <script type="text/javascript" src="/app.js"></script>
-</body>
-</html>
+          <fieldset>
+            <ul>
+              <li id="item0">
+                <img id="opt0" src="http://placehold.it/200x200/333" />
+                <input type="radio" id="r0" value="radio1st" name="favorite" />
+              </li>
+              <li id="item1">
+                <img id="opt1" src="http://placehold.it/200x200/333" />
+                <input type="radio" id="r1" value="radio2nd" name="favorite" />
+              </li>
+              <li id="item2">
+                <img id="opt2" src="http://placehold.it/200x200/333" />
+                <input type="radio" id="r2" value="radio3rd" name="favorite" />
+              </li>
+            </ul>
+          </fieldset>
+          <button type="submit">Vote!</button>
+        </form>
+        <!-- <img id="opt0" src="http://placehold.it/200x150/333" /> -->
+        <!-- <img id="opt1" src="http://placehold.it/200x150/333" /> -->
+        <!-- <img id="opt2" src="http://placehold.it/200x150/333" /> -->
+      </div><!-- div#vote-box -->
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+      <canvas id="myChart" width="400" height="400"></canvas>
+    </main>
+    <footer>
+      
+    </footer>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.js"></script>
+    <script type="text/javascript" src="/app.js"></script>
+  </body>
+  </html>
