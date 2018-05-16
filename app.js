@@ -12,14 +12,14 @@
 // input name="favorite" with radio options r0, r1, r2
 // img#opt0, img#opt1, img#opt2 are the 3 comparison images inside div#vote-box
 
-var ctx = document.getElementById('myChart').getContext('2d'); 
-var dataChart; 
+var ctx = document.getElementById('myChart').getContext('2d');
+var dataChart;
 var titles = []; // used for labels in charts.js
 var clicks = []; // used for clickCount data in charts.js
-var shown = [];  // used for shownCount data in charts.js
-var chartDrawn = false; 
+var shown = []; // used for shownCount data in charts.js
+var chartDrawn = false;
 
-var batteryLength = 25; 
+var batteryLength = 25;
 var compareCount = 3; // original plan for how many to compare at each test.
 var compareThem = []; // an array for however many we will compare at one time.
 
@@ -52,7 +52,7 @@ function Product(name, filepath) {
 } // end Product Object constructor function
 
 // === Some Object Methods ===
-// hmm, perhaps none. 
+// hmm, perhaps none.
 
 // === Create Known Object Instances ===
 // Our given Input Data
@@ -89,13 +89,13 @@ function renderThree(compareArray) {
   // for now assume the array only has 3 items
   img0.setAttribute('src', productList[compareArray[0]].filepath);
   choose0.setAttribute('value', compareArray[0]);
-  choose0.checked = false;
+  // choose0.checked = false;
   img1.setAttribute('src', productList[compareArray[1]].filepath);
   choose1.setAttribute('value', compareArray[1]);
-  choose1.checked = false;
+  // choose1.checked = false;
   img2.setAttribute('src', productList[compareArray[2]].filepath);
   choose2.setAttribute('value', compareArray[2]);
-  choose2.checked = false;
+  // choose2.checked = false;
 } // end function renderThree
 
 // ===================
@@ -109,17 +109,9 @@ function makeCurrentTest() { // works with an array of previously used products
   // select a random object from our productList array
   // add this object to notAllowed & currentCompare arrays
   for(var j = 0; j < 3; j++) { // currently assuming comparing 3 items each test
-    do {  // much of this can be replaced with array.includes or array.indexOf
-      currentCompare[j] = randomProduct(); 
-      var allowedFlag = true;
-      // console.log('item ' + j + ' selected: ' + currentCompare[j]);
-      for(var i = 0; i < notAllowed.length; i++) {
-        // console.log('does ' + currentCompare[j] + ' equal ' + notAllowed[i]);
-        if(currentCompare[j] === notAllowed[i]) {
-          allowedFlag = false;
-        }
-      } // test if current item is in the not allowed list
-    } while(allowedFlag === false);
+    do {
+      currentCompare[j] = randomProduct();
+    } while(notAllowed.includes(currentCompare[j]));
     notAllowed.push(currentCompare[j]);
   } // we have selected 3 non-duplicate indexes that also don't match the passed array of notAllowed
   // Stretch: for each compareThem (which has compareCount number of items) make a list of allowed indexes.
@@ -134,29 +126,29 @@ function prepNextTest() {
 } // end function prepNextTest
 
 function renderProgress() {
-  pElProgress.textContent = 'You have completed ' + testCount + ' out of ' + batteryLength + '.'; 
-  // in here we could put some words of encouragement or cute stuff as we go along. 
+  pElProgress.textContent = 'You have completed ' + testCount + ' out of ' + batteryLength + '.';
+  // in here we could put some words of encouragement or cute stuff as we go along.
 } // end function renderProgress
 
 function makeResults() { // this will be a list of text of the data.
   // ul#results is inside the aside for results
-  var ulEl = document.getElementById('results'); 
+  var ulEl = document.getElementById('results');
   for(var i in productList) {
     var liEl = document.createElement('li');
-    liEl.textContent = '' + productList[i].name + ': ' + productList[i].clickCount + ' out of ' + productList[i].shownCount + '.'; 
+    liEl.textContent = '' + productList[i].name + ': ' + productList[i].clickCount + ' out of ' + productList[i].shownCount + '.';
     ulEl.appendChild(liEl);
   }
 } // end makeResults
 
 function renderCharts() {
   // var ctx set as global variable
-  // unhide the chart 
+  // unhide the chart
 
   // need data array(s) to pass to charts.js
   for(var i in productList) { // set the arrays to be easier to use chart.js
-    titles[i] = productList[i].name; 
-    clicks[i] = productList[i].clickCount; 
-    shown[i] = productList[i].shownCount; 
+    titles[i] = productList[i].name;
+    clicks[i] = productList[i].clickCount;
+    shown[i] = productList[i].shownCount;
   }
 
   var data = {
@@ -164,74 +156,47 @@ function renderCharts() {
     datasets: [{
       data: clicks, // clickCount array we declared earlier
       backgroundColor: [
-        'bisque',
-        'darkgray',
-        'burlywood',
-        'lightblue',
-        'navy',
-        'bisque',
-        'darkgray',
-        'burlywood',
-        'lightblue',
-        'navy',
-        'bisque',
-        'darkgray',
-        'burlywood',
-        'lightblue',
-        'navy',
-        'bisque',
-        'darkgray',
-        'burlywood',
-        'lightblue',
-        'navy'        
+        'bisque', 'darkgray', 'burlywood', 'lightblue', 'navy',
+        'bisque', 'darkgray', 'burlywood', 'lightblue', 'navy',
+        'bisque', 'darkgray', 'burlywood', 'lightblue', 'navy',
+        'bisque', 'darkgray', 'burlywood', 'lightblue', 'navy'
       ],
+      borderColor: [ 
+        'black', 'black', 'black', 'black', 'black', 
+        'blue', 'blue', 'blue', 'blue', 'blue', 
+        'grey', 'grey', 'grey', 'grey', 'grey', 
+        'purple', 'purple', 'purple', 'purple', 'purple'
+      ],
+      borderWidth: 1, 
       hoverBackgroundColor: [
-        'purple',
-        'purple',
-        'purple',
-        'purple',
-        'purple',
-        'purple',
-        'purple',
-        'purple',
-        'purple',
-        'purple',
-        'purple',
-        'purple',
-        'purple',
-        'purple',
-        'purple',
-        'purple',
-        'purple',
-        'purple',
-        'purple',
-        'purple'                        
+        'purple', 'purple', 'purple', 'purple', 'purple', 
+        'purple', 'purple', 'purple', 'purple', 'purple', 
+        'purple', 'purple', 'purple', 'purple', 'purple', 
+        'purple', 'purple', 'purple', 'purple', 'purple'
       ]
     }]
-  }; // end literal object declaration data; 
+  }; // end literal object declaration data;
 
-  dataChart = new Chart(ctx, {
-    type: 'doughnut',
+  var myChart = new Chart(ctx, {
+    type: 'bar',
     data: data,
     options: {
-      responsive: false,
-      animation: {
-        duration: 1000,
-        easing: 'easeOutBounce'
+      scales: { 
+        yAxes: [{ // Problem Here // 
+          // scaleLabel: { 
+          //   display: true, 
+          //   labelString: 'Count Selected'
+          // },
+          ticks: {  
+            suggestedMax: 25,
+            beginAtZero:true
+          }
+        }]
       }
-    },
-    scales: {
-      yAxes: [{
-        ticks: {
-          max: 10,
-          min: 0,
-          stepSize: 1.0
-        }
-      }]
     }
   });
-  chartDrawn = true;
 
+  chartDrawn = true;
 } // end renderCharts
 
 // ===================
@@ -246,23 +211,23 @@ function handleSubmit(e) {
   // increment the shown counter for all displayed products
   for(var i in currentCompare) {
     productList[currentCompare[i]].shownCount ++;
-    // console.log(productList[currentCompare[i]].name + ' shown: ' + productList[currentCompare[i]].shownCount); 
+    // console.log(productList[currentCompare[i]].name + ' shown: ' + productList[currentCompare[i]].shownCount);
   }
   // console.log('current set of this test: ' + currentCompare);
   testCount++;
   // console.log('tests completed: ' + testCount);
   if(testCount < batteryLength) {
-    renderProgress(); 
-    prepNextTest(); 
-    makeCurrentTest(); 
+    renderProgress();
+    prepNextTest();
+    makeCurrentTest();
   } else {
-    // makeResults(); 
+    // makeResults();
     renderCharts(); // renderCharts() is prettier than the list of makeResults()
-    if(chartDrawn) { 
-      dataChart.update();
-    }
-    // hide some elements we don't need to see or interact with. 
-    voted.style.display = 'none'; 
+    // if(chartDrawn) {
+      // dataChart.update();
+    // }
+    // hide some elements we don't need to see or interact with.
+    voted.style.display = 'none';
     pElProgress.style.display = 'none';
   }
 }

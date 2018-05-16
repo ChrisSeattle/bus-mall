@@ -1,5 +1,4 @@
 
-
 /* ========================================= */
 /* A LOT of this Style is NOT correct.  */
 /* I need to read up on CSS Layout.  */
@@ -51,7 +50,6 @@ aside {
 /* Main Section holds div#vote-box, 3 img, button, and some p */
 main {
     float: right; 
-    /* display: inline-block; */
     width: 80%; 
 }
 #vote-box {
@@ -72,7 +70,6 @@ main {
     display: block; 
     width: 400px; 
     margin: 15px 100px; 
-
 }
 
 /* Footer Section  */
