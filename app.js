@@ -56,30 +56,37 @@ function Product(name, filepath) {
 
 // === Create Known Object Instances ===
 // Our given Input Data
-new Product('bag', '/img/bag.jpg');
-new Product('banana', '/img/banana.jpg');
-new Product('bathroom', '/img/bathroom.jpg');
-new Product('boots', '/img/boots.jpg');
-new Product('breakfast', '/img/breakfast.jpg');
-new Product('bubblegum', '/img/bubblegum.jpg');
-new Product('chair', '/img/chair.jpg');
-new Product('cthulhu', '/img/cthulhu.jpg');
-new Product('dogduck', '/img/dog-duck.jpg');
-new Product('dragon', '/img/dragon.jpg');
-new Product('pen', '/img/pen.jpg');
-new Product('petsweep', '/img/pet-sweep.jpg');
-new Product('scissors', '/img/scissors.jpg');
-new Product('shark', '/img/shark.jpg');
-new Product('sweep', '/img/sweep.png');
-new Product('tauntaun', '/img/tauntaun.jpg');
-new Product('unicorn', '/img/unicorn.jpg');
-new Product('usb', '/img/usb.gif');
-new Product('watercan', '/img/water-can.jpg');
-new Product('wineglass', '/img/wine-glass.jpg');
+var productImgArray = [
+  ['bag', '/img/bag.jpg'],
+  ['banana', '/img/banana.jpg'],
+  ['bathroom', '/img/bathroom.jpg'],
+  ['boots', '/img/boots.jpg'],
+  ['breakfast', '/img/breakfast.jpg'],
+  ['bubblegum', '/img/bubblegum.jpg'],
+  ['chair', '/img/chair.jpg'],
+  ['cthulhu', '/img/cthulhu.jpg'],
+  ['dogduck', '/img/dog-duck.jpg'],
+  ['dragon', '/img/dragon.jpg'],
+  ['pen', '/img/pen.jpg'],
+  ['petsweep', '/img/pet-sweep.jpg'],
+  ['scissors', '/img/scissors.jpg'],
+  ['shark', '/img/shark.jpg'],
+  ['sweep', '/img/sweep.png'],
+  ['tauntaun', '/img/tauntaun.jpg'],
+  ['unicorn', '/img/unicorn.jpg'],
+  ['usb', '/img/usb.gif'],
+  ['watercan', '/img/water-can.jpg'],
+  ['wineglass', '/img/wine-glass.jpg']
+];
 
 // ===================
 // Helper Functions
 // ===================
+function makeProductObjects() {
+  for(var i in productImgArray) {
+    new Product(productImgArray[i][0], productImgArray[i][1]);
+  }
+} // end function makeProductObjects
 
 function randomProduct() {
   return Math.floor(Math.random() * productList.length);
@@ -235,6 +242,7 @@ function handleSubmit(e) {
 // On page load, do the following
 // ====================================
 
+makeProductObjects(); 
 makeCurrentTest();
 
 
