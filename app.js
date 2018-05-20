@@ -159,6 +159,7 @@ function renderCharts() {
   // var ctx set as global variable
   // unhide the chart if it is hidden. 
 
+
   // need data array(s) to pass to charts.js
   for(var i in productList) { // set the arrays to be easier to use chart.js
     titles[i] = productList[i].name;
@@ -245,6 +246,7 @@ function handleSubmit(e) {
     // makeResults();
     renderCharts(); // renderCharts() is prettier than the list of makeResults()
     saveTestBattery(); 
+
     // hide some elements we don't need to see or interact with.
     voted.style.display = 'none';
     pElProgress.style.display = 'none';
