@@ -108,13 +108,10 @@ function renderThree(compareArray) {
 function getProductList() {
   if (localStorage.busProductData) {
     console.log('localStorage exists');
-    // take our objects & data from localStorage
-    var temp = localStorage.getItem('busProductData'); 
-    console.log(temp); 
-    productList = JSON.parse(temp);
+    productList = JSON.parse(localStorage.getItem('busProductData'));
   } else {
+    console.log('no localStorage. Starting from scratch.');
     for(var i in nameImg) {
-      console.log('no localStorage. Starting from scratch.');
       new Product(nameImg[i][0], nameImg[i][1]);
     }
   }
@@ -160,7 +157,7 @@ function makeResults() { // this will be a list of text of the data.
 
 function renderCharts() {
   // var ctx set as global variable
-  // unhide the chart
+  // unhide the chart if it is hidden. 
 
   // need data array(s) to pass to charts.js
   for(var i in productList) { // set the arrays to be easier to use chart.js
@@ -218,16 +215,9 @@ function renderCharts() {
 } // end renderCharts
 
 function saveTestBattery() {
-  var currentResults = ''; 
-  for(var i in productList) {
-    currentResults += JSON.stringify(productList[i]) + ',';
-  }
-  currentResults = currentResults.substr(0, currentResults.length - 1);
-  console.log(currentResults);
-  // currentResults = JSON.stringify(currentResults);
-  // console.log(currentResults);
-  
-  localStorage.setItem('busProductData', currentResults);
+
+  localStorage.setItem('busProductData', JSON.stringify(productList));
+
 } // end function saveTestBattery
 
 // ===================
@@ -254,12 +244,11 @@ function handleSubmit(e) {
   } else {
     // makeResults();
     renderCharts(); // renderCharts() is prettier than the list of makeResults()
-    // if(chartDrawn) {
-      // dataChart.update();
-    // }
+    saveTestBattery(); 
     // hide some elements we don't need to see or interact with.
     voted.style.display = 'none';
     pElProgress.style.display = 'none';
+    // turn off event listeners? Or not needed with the elements hidden? 
   }
 }
 // ====================================
@@ -268,7 +257,6 @@ function handleSubmit(e) {
 
 getProductList(); 
 makeCurrentTest();
-saveTestBattery(); 
 
 
 // ====================================
