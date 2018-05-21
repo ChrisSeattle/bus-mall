@@ -55,7 +55,7 @@ function Product(name, filepath) {
 
 // === Create Known Object Instances ===
 // Our given Input Data, used if user is visiting for the first time. 
-var deployUrl = 'https://chrisseattle.github.io/bus-mall/';
+var deployUrl = 'https://chrisseattle.github.io/bus-mall';
 var nameImg = [ 
   ['bag', '/img/bag.jpg'],
   ['banana', '/img/banana.jpg'],
