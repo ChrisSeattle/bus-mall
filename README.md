@@ -2,7 +2,7 @@
 Slow bus means captive audience and more sales. 
 
 **Author**: Chris L Chapman
-**Version**: 0.2.0 (increment the patch/fix version number up if you make more commits past your first submission)
+**Version**: 0.3.0 (increment the patch/fix version number up if you make more commits past your first submission)
 
 ## Overview
 We are working towards making a BusMall app (like SkyMall, but on the bus). First we want to make an app for focus group members to give us some market research data. This data will help the marketing research team determine what products should be included in the eventual BusMall store/catalog. 
