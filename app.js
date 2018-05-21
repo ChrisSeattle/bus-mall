@@ -158,7 +158,7 @@ function makeResults() { // this will be a list of text of the data.
 function renderCharts() {
   // var ctx set as global variable
   // unhide the chart if it is hidden. 
-
+  document.getElementById('myChart').style.display = 'block';
 
   // need data array(s) to pass to charts.js
   for(var i in productList) { // set the arrays to be easier to use chart.js
@@ -198,13 +198,9 @@ function renderCharts() {
     data: data,
     options: {
       scales: { 
-        yAxes: [{ // Problem Here // 
-          // scaleLabel: { 
-          //   display: true, 
-          //   labelString: 'Count Selected'
-          // },
+        yAxes: [{ 
           ticks: {  
-            suggestedMax: 25,
+            suggestedMax: 10,
             beginAtZero:true
           }
         }]

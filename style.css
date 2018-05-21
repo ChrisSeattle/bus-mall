@@ -1,78 +1,112 @@
-
-/* ========================================= */
-/* A LOT of this Style is NOT correct.  */
-/* I need to read up on CSS Layout.  */
-/* Current state of my CSS layout is a testing ground.  */
-/* ========================================== */
-
+/* Style for the Bus-Mall Market Research App */
 /* Header Section  */
 /* Has a logo img, a horizontal nav bar with tab like display */
-header {
-    background-color: #eee; 
-    height: 100px; 
-    width: 800px 
+body { 
+    background-color:  #00606e; /* taken from metro bus image. */ 
+}
+header, footer {
+    background-color:  #3393a2; /* adjusted from main background color. */ 
+    height: 80px;
+    margin: 10px auto; 
+    clear: both; 
 }
 header img {
-    padding: 15px 5px; 
-    float: left; 
-    width: 200px; 
+    padding: 5px;
+    float: left;
+    width: 131px;
 }
 header h1 {
-    margin: 35px 0; 
-    padding: 15px 5px; 
-    text-align: center; 
-    float: left; 
-    display: inline-block; 
-    width: 200px; 
-    /* border: 1px solid red;  */
+    font-size: 22px;
+    color: #d18a31; /* taken from metro bus image. */ 
+    font-weight: bolder; 
+    margin: 25px 0 0 0;
+    padding: 5px;
+    text-align: center;
+    float: left;
+    display: inline-block;
+    width: 269px;
 }
 header ul {
-    float: left; 
-    padding: 15px 5px; 
     
 }
 header li {
-    margin: 40px 0 0 0; 
-    padding: 5px 5px 25px 5px; 
-    display: inline-block; 
-    width: 70px;
-    /* height: 20px;  */
-    border: 3px solid grey;  
-    margin: 0; 
-    float: right; 
+    float: left;
+    display: inline-block;
+    width: 75px;
+    height: 20px;
+    margin-top: 34px;  
+    border: 3px solid  #00606e; /* taken from metro bus image. */
+    background-color: #d18a31; /* taken from metro bus image. */
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    text-align: center;
+    font-size: 16px;
+    padding: 10px;
+}
+p, h2 {
+    background-color: #d18a31; /* taken from metro bus image. */
+}
+h2 {
+    font-weight: bold; 
+    font-size: 16px; 
+}
+p {
+    margin: 5px 0; 
+}
+.style-img {
+    width: 500px; 
 }
 /* Results Aside  */
 aside {
-    clear: left; 
+    clear: left;
     float: left;
-    width: 20%;  
+    width: 160px;
+    margin: 0 5px; 
+    /* border: 4px solid #3393a2;  */
 }
 /* Main Section holds div#vote-box, 3 img, button, and some p */
 main {
-    float: right; 
-    width: 80%; 
+    float: left;
+    width: 680px;
+}
+main#wide {
+    width: 840px; 
 }
 #vote-box {
-
+    border-radius: 35px; 
+    background-color: white; 
 }
-#vote-box form li img {
-    width: 200px; 
+#vote-box form {
+    padding: 5px 0; 
 }
 #vote-box form li {
     display: inline-block;
-    
+    margin: 15px 5px;
+    padding: 10px 5px;
+    /* vertical-align: top; */
+    /* border: 2px solid yellow; */
+    border-radius: 25px;
+    background-color: white;
+}
+#vote-box form li img {
+    width: 200px;
 }
 #vote-box form input {
-    display: block; 
-    margin: 0 95px; /* maybe cludgy position */ 
+    display: block;
+    margin: 0 95px; /* maybe cludgy position */
+    vertical-align: bottom;
 }
 #vote-box button {
-    display: block; 
-    width: 400px; 
-    margin: 15px 100px; 
+    display: block;
+    width: 400px;
+    margin: 5px 0 25px 130px;
+    padding: 5px; 
+    color: black; 
+    background-color: goldenrod;
+    border: 2px solid  #3393a2; 
+    border-radius: 15px; 
 }
-
-/* Footer Section  */
-footer {
-
+canvas {
+    background-color: lightyellow; 
+    display: none;     /* the app.js will make this visible if it is used.  */
 }
