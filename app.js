@@ -56,7 +56,8 @@ function Product(name, filepath) {
 
 // === Create Known Object Instances ===
 // Our given Input Data
-var productImgArray = [
+
+var nameImg = [ 
   ['bag', '/img/bag.jpg'],
   ['banana', '/img/banana.jpg'],
   ['bathroom', '/img/bathroom.jpg'],
@@ -77,16 +78,11 @@ var productImgArray = [
   ['usb', '/img/usb.gif'],
   ['watercan', '/img/water-can.jpg'],
   ['wineglass', '/img/wine-glass.jpg']
-];
+]; 
 
 // ===================
 // Helper Functions
 // ===================
-function makeProductObjects() {
-  for(var i in productImgArray) {
-    new Product(productImgArray[i][0], productImgArray[i][1]);
-  }
-} // end function makeProductObjects
 
 function randomProduct() {
   return Math.floor(Math.random() * productList.length);
@@ -108,6 +104,18 @@ function renderThree(compareArray) {
 // ===================
 // Main Functions
 // ===================
+
+function getProductList() {
+  if (localStorage.busProductData) {
+    console.log('localStorage exists');
+    productList = JSON.parse(localStorage.getItem('busProductData'));
+  } else {
+    console.log('no localStorage. Starting from scratch.');
+    for(var i in nameImg) {
+      new Product(nameImg[i][0], nameImg[i][1]);
+    }
+  }
+} // end getProductList
 
 function makeCurrentTest() { // works with an array of previously used products
   if(notAllowed.length === 0) { // so this is the first display of a test set.
@@ -149,7 +157,8 @@ function makeResults() { // this will be a list of text of the data.
 
 function renderCharts() {
   // var ctx set as global variable
-  // unhide the chart
+  // unhide the chart if it is hidden. 
+
 
   // need data array(s) to pass to charts.js
   for(var i in productList) { // set the arrays to be easier to use chart.js
@@ -206,6 +215,12 @@ function renderCharts() {
   chartDrawn = true;
 } // end renderCharts
 
+function saveTestBattery() {
+
+  localStorage.setItem('busProductData', JSON.stringify(productList));
+
+} // end function saveTestBattery
+
 // ===================
 // Event functions / handlers.
 // ===================
@@ -230,19 +245,19 @@ function handleSubmit(e) {
   } else {
     // makeResults();
     renderCharts(); // renderCharts() is prettier than the list of makeResults()
-    // if(chartDrawn) {
-      // dataChart.update();
-    // }
+    saveTestBattery(); 
+
     // hide some elements we don't need to see or interact with.
     voted.style.display = 'none';
     pElProgress.style.display = 'none';
+    // turn off event listeners? Or not needed with the elements hidden? 
   }
 }
 // ====================================
 // On page load, do the following
 // ====================================
 
-makeProductObjects(); 
+getProductList(); 
 makeCurrentTest();
 
 
