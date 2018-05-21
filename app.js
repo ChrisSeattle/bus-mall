@@ -34,7 +34,6 @@ var choose2 = document.getElementById('r2');
 var img0 = document.getElementById('opt0');
 var img1 = document.getElementById('opt1');
 var img2 = document.getElementById('opt2');
-// var liEl = document.getElementById('item1'); // currently not used, but still an option in HTML
 
 var testCount = 0;
 var productList = []; // Constructor will push each product object instance to this list
@@ -52,10 +51,10 @@ function Product(name, filepath) {
 } // end Product Object constructor function
 
 // === Some Object Methods ===
-// hmm, perhaps none.
+// Perhaps none.
 
 // === Create Known Object Instances ===
-// Our given Input Data
+// Our given Input Data, used if user is visiting for the first time. 
 
 var nameImg = [ 
   ['bag', '/img/bag.jpg'],
@@ -117,9 +116,9 @@ function getProductList() {
   }
 } // end getProductList
 
-function makeCurrentTest() { // works with an array of previously used products
+function makeCurrentTest() { 
   if(notAllowed.length === 0) { // so this is the first display of a test set.
-    notAllowed = [productList.length + 1]; // maybe could be productList.length, I think.
+    notAllowed = [productList.length + 1]; 
   }
   // select a random object from our productList array
   // add this object to notAllowed & currentCompare arrays
@@ -156,7 +155,7 @@ function makeResults() { // this will be a list of text of the data.
 } // end makeResults
 
 function renderCharts() {
-  // var ctx set as global variable
+  // ctx variable is already set as global variable
   // unhide the chart if it is hidden. 
   document.getElementById('myChart').style.display = 'block';
 
@@ -212,9 +211,7 @@ function renderCharts() {
 } // end renderCharts
 
 function saveTestBattery() {
-
   localStorage.setItem('busProductData', JSON.stringify(productList));
-
 } // end function saveTestBattery
 
 // ===================
@@ -229,11 +226,8 @@ function handleSubmit(e) {
   // increment the shown counter for all displayed products
   for(var i in currentCompare) {
     productList[currentCompare[i]].shownCount ++;
-    // console.log(productList[currentCompare[i]].name + ' shown: ' + productList[currentCompare[i]].shownCount);
   }
-  // console.log('current set of this test: ' + currentCompare);
   testCount++;
-  // console.log('tests completed: ' + testCount);
   if(testCount < batteryLength) {
     renderProgress();
     prepNextTest();
@@ -248,14 +242,14 @@ function handleSubmit(e) {
     pElProgress.style.display = 'none';
     // turn off event listeners? Or not needed with the elements hidden? 
   }
-}
+} // end function handleSubmit
+
 // ====================================
 // On page load, do the following
 // ====================================
 
 getProductList(); 
 makeCurrentTest();
-
 
 // ====================================
 // Event Listners
