@@ -69,6 +69,9 @@ main {
     float: left;
     width: 680px;
 }
+main#wide {
+    width: 840px; 
+}
 #vote-box {
     border-radius: 35px; 
     background-color: white; 
@@ -104,6 +107,6 @@ main {
     border-radius: 15px; 
 }
 canvas {
-    /* background-color: lightyellow;  */
-    /* display: none;  */
+    background-color: lightyellow; 
+    display: none;     /* the app.js will make this visible if it is used.  */
 }
