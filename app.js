@@ -55,7 +55,7 @@ function Product(name, filepath) {
 
 // === Create Known Object Instances ===
 // Our given Input Data, used if user is visiting for the first time. 
-
+var deployUrl = 'https://chrisseattle.github.io/bus-mall/';
 var nameImg = [ 
   ['bag', '/img/bag.jpg'],
   ['banana', '/img/banana.jpg'],
@@ -111,7 +111,8 @@ function getProductList() {
   } else {
     console.log('no localStorage. Starting from scratch.');
     for(var i in nameImg) {
-      new Product(nameImg[i][0], nameImg[i][1]);
+      var currentUrl = '' + deployUrl + nameImg[i][1]; 
+      new Product(nameImg[i][0], currentUrl);
     }
   }
 } // end getProductList
